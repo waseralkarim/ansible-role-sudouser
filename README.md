@@ -1,4 +1,4 @@
-Role Name
+New user create and sudo permission automation on ubuntu
 =========
 
 A brief description of the role goes here.
