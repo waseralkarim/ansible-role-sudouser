@@ -1,4 +1,4 @@
-New user create and sudo permission automation on ubuntu
+Ansible Role For New user create and sudo permission
 =========
 
 A brief description of the role goes here.
@@ -68,7 +68,8 @@ ssh-copy-id ubuntu@<remote_server_ip>
 Run command:
 
 ```bash
-ansible-playbook -i inventory playbook.yml
+ansible-playbook -i inventory playbook.yml --ask-become-pass
+
 ```
 
 
