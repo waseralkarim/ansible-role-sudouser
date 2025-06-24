@@ -18,6 +18,60 @@ Dependencies
 
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
+## How to run this role
+
+### Create playbook.yml in control host
+Example yaml file: 
+
+```bash
+---
+- hosts: all
+  become: true
+  roles:
+    - waseralkarim.sudouser
+```
+### Create inventory file
+Example inventory file:
+
+```bash
+[all]
+<remote_server_ip> ansible_user=ubuntu
+```
+
+### Generate SSH Key on Your Control Node (if not already)
+
+If you haven't already done this on your Ansible **control machine (your Ubuntu system)**:
+
+```bash
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
+
+```
+
+(Press Enter at prompts to accept defaults)
+
+This creates:
+
+- `~/.ssh/id_rsa` (private key)
+- `~/.ssh/id_rsa.pub` (public key)
+
+---
+
+### Copy Your SSH Public Key to the Target Host
+
+To avoid `--ask-pass` every time and use SSH key authentication:
+
+```bash
+ssh-copy-id ubuntu@<remote_server_ip>
+
+```
+
+Run command:
+
+```bash
+ansible-playbook -i inventory playbook.yml
+```
+
+
 Example Playbook
 ----------------
 
