@@ -1,0 +1,27 @@
+- name: Create user "{{ sudo_username }}"
+  ansible.builtin.user:
+    name: "{{ sudo_username }}"
+    shell: /bin/bash
+    state: present
+    create_home: true
+
+- name: Set password for user "{{ sudo_username }}"
+  ansible.builtin.user:
+    name: "{{ sudo_username }}"
+    password: "{{ sudo_password | password_hash('sha512') }}"
+
+- name: Add "{{ sudo_username }}" to sudo group
+  ansible.builtin.user:
+    name: "{{ sudo_username }}"
+    groups: sudo
+    append: yes
+
+- name: Allow "{{ sudo_username }}" to run sudo without password
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/{{ sudo_username }}"
+    content: "{{ sudo_username }} ALL=(ALL) NOPASSWD:ALL\n"
+    owner: root
+    group: root
+    mode: '0440'
+  when: sudo_nopasswd
+

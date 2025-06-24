@@ -1,0 +1,6 @@
+---
+# defaults file for sudouser
+sudo_username: superuser
+sudo_password: "your_password"  # plaintext (can be overridden or vaulted)
+sudo_nopasswd: true             # whether to allow passwordless sudo
+
